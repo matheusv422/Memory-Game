@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <locale.h>
+
+#define coberto 0
+#define achado 1
+
+int game1 [4][4] = {
+// Aqui é a área responsável pela escolha das cartas/números.
+    1,2,3,4,
+    5,6,7,8,
+    1,2,3,4,
+    5,6,7,0
+
+
+
+};
+int game2 [4][4] ={
+    //Essa parte serve para saber se as cartas/números foram descobertos ou não.
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0
+};
+//Algumas funções:
+void  setup  (); //Para inicializar a montagem do game.
+int review (); // Vai ser usado para descobrir quais peças foram descobertas.
+int main (void){
+   int exit = 0;
+    int l,c,l2,c2;
+    int opc = 1, gover = 0;
+    while (opc !=2){
+    system ("cls");
+    printf ("\t\t Welcome to Memory Game! \n\n");
+    printf ("Selecione uma opção: \n");
+    printf ("(1) Começar \n");
+    printf ("(2) Sair \n");
+    printf ("Sua opção é a: ");
+    scanf ("%d", &opc);  //Vai servir para ler a variável opc
+    if (opc ==1){
+        while(!gover){
+            jgdl: system ("cls");
+            setup();
+            printf ("Digite a linha desejada e a coluna respectivamente: ");
+            scanf ("%d %d", &l2, &c2);
+            l2--; c2--;
+            if  (game2[l2][c2]== achado)
+                // Aqui serve para demonstrar se determinada posição foi encontrada.{
+                printf ("Que pena, esse lugar ja foi encontrado. \n");
+                getchar();
+                goto jgdl;}
+            if (l2<0 || l2>3 || c2>5)
+            //Aqui a condição só irá ocorrer se os valores forem invalidos.{
+                printf ("Números entre 1 e 5! \n");
+                getchar();
+                goto jgdl;
+                }
+            game2[l2][c2] = achado;
+            if (game1 [l][c] != game1 [l2][c2]){
+                //Caso os valores das posições sejam diferentes.
+                system ("cls");
+                setup();
+                printf ("Errou! Errou feio, errou rude! \n\n");
+                Sleep (1000);
+                game2[l][c] = coberto;
+                game2[l2][c2] = coberto;
+    }
+    gover = review();
+    }
+    printf ("Muito Bem! Você conseguiu!\n");
+    getchar();
+
+    }
+
+
+    getchar();
+    exit(2);
+    // Trabalhando agora as funções 'setup()' e 'review()'
+    void setup (){
+        /* Aqui será feita a leitura da matriz 'jogo1' com base na matriz 'jogo2' e
+        também serão impressos os valores na tela caso ja tenham sido encontrados*/
+
+        int l,c;
+        printf (" 1 2 3 4 \n");
+        for (l=0; l<4; l++){
+            printf ("%d ", l+1);
+            for (c=0; c<4; c++){
+                if (game2[l][c] == achado)
+                    printf ("%d|", game1[l][c]);
+                else if (game2 [l][c] == achado){
+                    if(l<3) printf ("_|");
+                    else printf (" |");
+
+                }
+            }
+        }
+    }
+    printf("\n\n");
+
+    int review () {
+        /* Nessa função será feita a verificação das posições
+        para saber se já foram descobertas, caso contrário, ela retornará 0*/
+
+    if (qt ==20)
+        return 1;
+    return 0;
+
+
+
+    int l,c;
+    int qt;
+    for (l= 0; l<4; l++)
+        for (c= 0; c<4; c++)
+    if (game2 [l][c] == achado)
+        qt++;
+
+    }
